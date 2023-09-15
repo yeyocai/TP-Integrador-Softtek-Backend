@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TP_Integrador_Softtek_Backend.DataAccess;
+using TP_Integrador_Softtek_Backend.Services;
 
 namespace TP_Integrador_Softtek_Backend
 {
@@ -20,6 +21,8 @@ namespace TP_Integrador_Softtek_Backend
             {
                 options.UseSqlServer("name=DefaultConnection");
             });
+
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWorkService>();
 
             var app = builder.Build();
 
