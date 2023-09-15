@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using TP_Integrador_Softtek_Backend.DataAccess;
+
 namespace TP_Integrador_Softtek_Backend
 {
     public class Program
@@ -12,6 +15,11 @@ namespace TP_Integrador_Softtek_Backend
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer("name=DefaultConnection");
+            });
 
             var app = builder.Build();
 
