@@ -28,7 +28,6 @@ namespace TP_Integrador_Softtek_Backend.Entities
             Terminado = 3,
         }
 
-        //[Required]
         [Column("fechaBaja", TypeName = "DATE")]
         public DateTime? DischargeDate { get; set; }
     }

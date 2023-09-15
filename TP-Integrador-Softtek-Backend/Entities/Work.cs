@@ -33,7 +33,6 @@ namespace TP_Integrador_Softtek_Backend.Entities
         [Column("costo", TypeName = "NUMERIC(10,2)")]
         public double Cost { get; set; }
 
-        //[Required]
         [Column("fechaBaja", TypeName = "DATE")]
         public DateTime? DischargeDate { get; set; }
 

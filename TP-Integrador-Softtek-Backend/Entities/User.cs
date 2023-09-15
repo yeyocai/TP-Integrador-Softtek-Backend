@@ -31,7 +31,6 @@ namespace TP_Integrador_Softtek_Backend.Entities
         [Column("contrasenia", TypeName = "VARCHAR(50)")]
         public string Password { get; set; }
 
-        //[Required]
         [Column("fechaBaja", TypeName = "DATE")]
         public DateTime? DischargeDate { get; set; }
     }
