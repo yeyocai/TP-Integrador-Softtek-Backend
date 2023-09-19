@@ -8,6 +8,8 @@ namespace TP_Integrador_Softtek_Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
+
     public class UsersController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
