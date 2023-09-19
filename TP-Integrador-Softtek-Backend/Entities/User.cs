@@ -28,6 +28,10 @@ namespace TP_Integrador_Softtek_Backend.Entities
         }
 
         [Required]
+        [Column("email", TypeName = "VARCHAR(100)")]
+        public string Email { get; set; }
+
+        [Required]
         [Column("contrasenia", TypeName = "VARCHAR(50)")]
         public string Password { get; set; }
 

@@ -16,6 +16,7 @@ namespace TP_Integrador_Softtek_Backend.DataAccess.DatabaseSeeding
                     Name = "Juan Perez",
                     Dni = 11222333,
                     Type = User.UserType.Administrador,
+                    Email = "juan.perez@gmail.com",
                     Password = "1234",
                     DischargeDate = null
                 },
@@ -26,6 +27,7 @@ namespace TP_Integrador_Softtek_Backend.DataAccess.DatabaseSeeding
                     Name = "Maria Lopez",
                     Dni = 22111555,
                     Type = User.UserType.Consultor,
+                    Email = "maria.lopez@gmail.com",
                     Password = "2222",
                     DischargeDate = null
                 });
