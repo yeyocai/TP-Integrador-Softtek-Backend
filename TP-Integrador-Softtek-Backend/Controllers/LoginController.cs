@@ -20,7 +20,7 @@ namespace TP_Integrador_Softtek_Backend.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost] 
         public async Task<IActionResult> Login(AuthenticateDto dto)
         {
             var userCredentials = await _unitOfWork.UserRepository.AuthenticateCredentials(dto);

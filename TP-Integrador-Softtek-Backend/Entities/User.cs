@@ -1,10 +1,38 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using TP_Integrador_Softtek_Backend.DTOs;
 
 namespace TP_Integrador_Softtek_Backend.Entities
 {
     public class User
     {
+        public User(RegisterDto dto)
+        {
+            Name = dto.Name;
+            Dni = dto.Dni;
+            Type = dto.Type;
+            Email = dto.Email;
+            Password = dto.Password;
+            DischargeDate = null;
+        }
+
+        public User(RegisterDto dto, int id)
+        {
+            Id = id;
+            Name = dto.Name;
+            Dni = dto.Dni;
+            Type = dto.Type;
+            Email = dto.Email;
+            Password = dto.Password;
+            DischargeDate = dto.DischargeDate;
+        }
+
+        public User()
+        {
+
+        }
+
+
         [Key]
         [Column("codUsuario")]
         public int Id { get; set; }
