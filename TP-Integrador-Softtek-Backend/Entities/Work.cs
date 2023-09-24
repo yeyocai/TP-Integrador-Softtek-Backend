@@ -1,10 +1,42 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
+using System.Xml.Linq;
+using TP_Integrador_Softtek_Backend.DTOs;
 
 namespace TP_Integrador_Softtek_Backend.Entities
 {
     public class Work
     {
+        public Work(WorkDto dto)
+        {
+            Date = dto.Date;
+            ProjectId = dto.ProjectId;
+            ServiceId = dto.ServiceId;
+            NumberOfHours = dto.NumberOfHours;
+            HourValue = dto.HourValue;
+            Cost = dto.Cost;
+            DischargeDate = dto.DischargeDate;
+        }
+
+        public Work(WorkDto dto, int id)
+        {
+            Id = id;
+            Date = dto.Date;
+            ProjectId = dto.ProjectId;
+            ServiceId = dto.ServiceId;
+            NumberOfHours = dto.NumberOfHours;
+            HourValue = dto.HourValue;
+            Cost = dto.Cost;
+            DischargeDate = dto.DischargeDate;
+        }
+
+        public Work()
+        {
+
+        }
+
+
         [Key]
         [Column("codTrabajo")]
         public int Id { get; set; }

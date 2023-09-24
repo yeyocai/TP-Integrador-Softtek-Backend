@@ -1,10 +1,36 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Net;
+using TP_Integrador_Softtek_Backend.DTOs;
 
 namespace TP_Integrador_Softtek_Backend.Entities
 {
     public class Project
     {
+        public Project(ProjectDto dto)
+        {
+            Name = dto.Name;
+            Address = dto.Address;
+            State = dto.State;
+            DischargeDate = null;
+        }
+
+        public Project(ProjectDto dto, int id)
+        {
+            Id = id;
+            Name = dto.Name;
+            Address = dto.Address;
+            State = dto.State;
+            DischargeDate = null;
+        }
+
+        public Project()
+        {
+
+        }
+
+
+
         [Key]
         [Column ("codProyecto")]
         public int Id { get; set; }
