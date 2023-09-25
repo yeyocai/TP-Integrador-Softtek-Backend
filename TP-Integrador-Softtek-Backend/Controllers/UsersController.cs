@@ -31,19 +31,6 @@ namespace TP_Integrador_Softtek_Backend.Controllers
         public async Task<ActionResult<IEnumerable<User>>> GetAll()
         {
             var users = await _unitOfWork.UserRepository.GetAll();
-
-
-            /*var token = _tokenJwtHelper.GenerateToken(userCredentials);
-
-            var user = new UserLoginDto()
-            {
-                Email = userCredentials.Email,
-                Name = userCredentials.Name,
-                Token = token
-            };
-
-            return Ok(user);*/
-
             return Ok(users);
         }
 

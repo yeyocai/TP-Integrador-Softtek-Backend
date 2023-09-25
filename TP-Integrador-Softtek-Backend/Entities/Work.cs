@@ -67,11 +67,5 @@ namespace TP_Integrador_Softtek_Backend.Entities
 
         [Column("fechaBaja", TypeName = "DATE")]
         public DateTime? DischargeDate { get; set; }
-
-        //[ForeignKey("ProjectId")]
-        //public Project Project { get; set; }
-
-        //[ForeignKey("ServiceId")]
-        //public Service Service { get; set; }
     }
 }
