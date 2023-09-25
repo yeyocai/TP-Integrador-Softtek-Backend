@@ -20,6 +20,10 @@ namespace TP_Integrador_Softtek_Backend.Controllers
         }
 
 
+        /// <summary>
+        /// Obtiene todos los servicios que se encuentren activos
+        /// </summary>
+        /// <returns>Todos los servicios que cumplen la condicion</returns>
         [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         [Route("GetAll")]
@@ -30,6 +34,11 @@ namespace TP_Integrador_Softtek_Backend.Controllers
         }
 
 
+        /// <summary>
+        /// Obtiene un servicio segun su codigo de servicio
+        /// </summary>
+        /// <param name="id">Codigo de servicio</param>
+        /// <returns>El servicio con ese codigo o un mensaje si no existe</returns>
         [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         [Route("GetById/{id}")]
@@ -39,13 +48,18 @@ namespace TP_Integrador_Softtek_Backend.Controllers
 
             if (service == null)
             {
-                return BadRequest(false);
+                return BadRequest("El servicio no existe");
             }
 
             return Ok(service);
         }
 
 
+        /// <summary>
+        /// Registra un nuevo servicio
+        /// </summary>
+        /// <param name="dto">Campos del nuevo servicio</param>
+        /// <returns>Un mensaje informativo</returns>
         [Authorize(Policy = "Administrador")]
         [HttpPost]
         [Route("Register")]
@@ -54,27 +68,50 @@ namespace TP_Integrador_Softtek_Backend.Controllers
             var service = new Service(dto);
             await _unitOfWork.ServiceRepository.Insert(service);
             await _unitOfWork.Complete();
-            return Ok(true);
+            return Ok("Servicio creado");
         }
 
 
+        /// <summary>
+        /// Actualiza los campos de un servicio
+        /// </summary>
+        /// <param name="id">Codigo del servicio</param>
+        /// <param name="dto">Nuevos campos del servicio</param>
+        /// <returns>Un mensaje informativo</returns>
         [Authorize(Policy = "Administrador")]
         [HttpPut("Update/{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, ServiceDto dto)
         {
             var result = await _unitOfWork.ServiceRepository.Update(new Service(dto, id));
+
+            if (result == false)
+            {
+                return BadRequest("El servicio no existe");
+            }
+
             await _unitOfWork.Complete();
-            return Ok(true);
+            return Ok("Servicio actualizado");
         }
 
 
+        /// <summary>
+        /// Elimina de manera logica un servicio, poniendolo como inactivo
+        /// </summary>
+        /// <param name="id">Codigo del servicio</param>
+        /// <returns>Un mensaje informativo</returns>
         [Authorize(Policy = "Administrador")]
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var result = await _unitOfWork.ServiceRepository.Delete(id);
+
+            if (result == false)
+            {
+                return BadRequest("El servicio no existe");
+            }
+
             await _unitOfWork.Complete();
-            return Ok(true);
+            return Ok("Servicio eliminado");
         }
     }
 }

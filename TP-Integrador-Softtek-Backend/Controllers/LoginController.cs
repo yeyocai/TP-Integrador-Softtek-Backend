@@ -19,7 +19,11 @@ namespace TP_Integrador_Softtek_Backend.Controllers
             _tokenJwtHelper = new TokenJwtHelper(configuration);
         }
 
-
+        /// <summary>
+        /// Verifica que el mail y la contraseña sean correctos y si es asi, genera el token para el rol correspondiente
+        /// </summary>
+        /// <param name="dto">Email y contraseña</param>
+        /// <returns>Email, Nombre y Token, o un mensaje</returns>
         [HttpPost] 
         public async Task<IActionResult> Login(AuthenticateDto dto)
         {

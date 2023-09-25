@@ -30,7 +30,7 @@ namespace TP_Integrador_Softtek_Backend.DataAccess.Repositories
 
         public override async Task<Project?> GetById(int id)
         {
-            return await _context.Projects.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Projects.FirstOrDefaultAsync(x => x.Id == id && x.DischargeDate == null);
         }
 
 
