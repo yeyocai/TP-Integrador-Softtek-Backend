@@ -10,5 +10,6 @@ namespace TP_Integrador_Softtek_Backend.DTOs
         public string Email { get; set; }
         public string Password { get; set; }
         public DateTime? DischargeDate { get; set; }
+        public int RoleId { get; set; }
     }
 }

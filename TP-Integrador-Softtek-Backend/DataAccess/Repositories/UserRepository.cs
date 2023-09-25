@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TP_Integrador_Softtek_Backend.DataAccess.Repositories.Interfaces;
 using TP_Integrador_Softtek_Backend.DTOs;
 using TP_Integrador_Softtek_Backend.Entities;
+using TP_Integrador_Softtek_Backend.Helper;
 
 namespace TP_Integrador_Softtek_Backend.DataAccess.Repositories
 {
@@ -65,7 +66,7 @@ namespace TP_Integrador_Softtek_Backend.DataAccess.Repositories
 
         public async Task<User?> AuthenticateCredentials(AuthenticateDto dto)
         {
-            return await _context.Users.SingleOrDefaultAsync(x => x.Email == dto.Email && x.Password == dto.Password);
+            return await _context.Users.SingleOrDefaultAsync(x => x.Email == dto.Email && x.Password == PasswordEncryptHelper.EncryptPassword(dto.Password));
         }
     }
 }

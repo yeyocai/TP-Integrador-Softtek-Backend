@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TP_Integrador_Softtek_Backend.DTOs;
 using TP_Integrador_Softtek_Backend.Entities;
+using TP_Integrador_Softtek_Backend.Helper;
 using TP_Integrador_Softtek_Backend.Services;
 
 namespace TP_Integrador_Softtek_Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
 
     public class UsersController : ControllerBase
     {
@@ -21,6 +21,7 @@ namespace TP_Integrador_Softtek_Backend.Controllers
         }
 
 
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         [Route("GetAll")]
         public async Task<ActionResult<IEnumerable<User>>> GetAll()
@@ -30,6 +31,7 @@ namespace TP_Integrador_Softtek_Backend.Controllers
         }
 
 
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         [Route("GetById/{id}")]
         public async Task<IActionResult> GetById([FromRoute]int id)
@@ -45,10 +47,12 @@ namespace TP_Integrador_Softtek_Backend.Controllers
         }
 
 
+        [Authorize(Policy = "Administrador")]
         [HttpPost]
         [Route("Register")]
         public async Task<IActionResult> Register(RegisterDto dto)
         {
+            PasswordEncryptHelper.EncryptPassword(dto.Password);
             var user = new User(dto);
             await _unitOfWork.UserRepository.Insert(user);
             await _unitOfWork.Complete();
@@ -56,6 +60,7 @@ namespace TP_Integrador_Softtek_Backend.Controllers
         }
 
 
+        [Authorize(Policy = "Administrador")]
         [HttpPut("Update/{id}")]
         public async Task<IActionResult> Update([FromRoute]int id, RegisterDto dto)
         {
@@ -65,6 +70,7 @@ namespace TP_Integrador_Softtek_Backend.Controllers
         }
 
 
+        [Authorize(Policy = "Administrador")]
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {

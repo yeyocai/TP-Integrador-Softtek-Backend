@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Xml.Linq;
 using TP_Integrador_Softtek_Backend.Entities;
+using TP_Integrador_Softtek_Backend.Helper;
 
 namespace TP_Integrador_Softtek_Backend.DataAccess.DatabaseSeeding
 {
@@ -17,7 +18,8 @@ namespace TP_Integrador_Softtek_Backend.DataAccess.DatabaseSeeding
                     Dni = 11222333,
                     Type = User.UserType.Administrador,
                     Email = "juan.perez@gmail.com",
-                    Password = "1234",
+                    Password = PasswordEncryptHelper.EncryptPassword("1234"),
+                    RoleId = 1,
                     DischargeDate = null
                 },
 
@@ -28,7 +30,8 @@ namespace TP_Integrador_Softtek_Backend.DataAccess.DatabaseSeeding
                     Dni = 22111555,
                     Type = User.UserType.Consultor,
                     Email = "maria.lopez@gmail.com",
-                    Password = "2222",
+                    Password = PasswordEncryptHelper.EncryptPassword("2222"),
+                    RoleId = 2,
                     DischargeDate = null
                 });
         }

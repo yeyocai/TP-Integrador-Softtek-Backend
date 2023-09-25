@@ -12,7 +12,7 @@ using TP_Integrador_Softtek_Backend.DataAccess;
 namespace TP_Integrador_Softtek_Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230915001720_TechOil")]
+    [Migration("20230925011128_TechOil")]
     partial class TechOil
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,6 +54,81 @@ namespace TP_Integrador_Softtek_Backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Projects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 10,
+                            Address = "Humberto Primo 123",
+                            Name = "Extracción de gas en Vaca Muerta",
+                            State = (byte)1
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Address = "Almafuerte 256",
+                            Name = "Creación de gasoducto Nestor Kirchner",
+                            State = (byte)2
+                        },
+                        new
+                        {
+                            Id = 50,
+                            Address = "Machado 255",
+                            Name = "Extracción de petóleo en Vaca Muerta",
+                            State = (byte)3
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Address = "Salta 123",
+                            DischargeDate = new DateTime(2023, 2, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Extracción de minerales",
+                            State = (byte)3
+                        });
+                });
+
+            modelBuilder.Entity("TP_Integrador_Softtek_Backend.Entities.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("codRol");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit")
+                        .HasColumnName("activo");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("descripcion");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nombre");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Active = true,
+                            Description = "Administrador",
+                            Name = "Administrador"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Active = true,
+                            Description = "Consultor",
+                            Name = "Consultor"
+                        });
                 });
 
             modelBuilder.Entity("TP_Integrador_Softtek_Backend.Entities.Service", b =>
@@ -81,6 +156,29 @@ namespace TP_Integrador_Softtek_Backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Services");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Servicio de soldadura de caños",
+                            HourValue = 25700.25m,
+                            State = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Servicio de instalación de gasoducto",
+                            HourValue = 35800.7m,
+                            State = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Servicio de sellado de pérdidas",
+                            HourValue = 10500.9m,
+                            State = false
+                        });
                 });
 
             modelBuilder.Entity("TP_Integrador_Softtek_Backend.Entities.User", b =>
@@ -100,6 +198,11 @@ namespace TP_Integrador_Softtek_Backend.Migrations
                         .HasColumnType("INT")
                         .HasColumnName("dni");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(100)")
+                        .HasColumnName("email");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("VARCHAR(100)")
@@ -107,14 +210,20 @@ namespace TP_Integrador_Softtek_Backend.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(50)")
+                        .HasColumnType("VARCHAR(250)")
                         .HasColumnName("contrasenia");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int")
+                        .HasColumnName("rol");
 
                     b.Property<byte>("Type")
                         .HasColumnType("TINYINT")
                         .HasColumnName("tipo");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
 
@@ -123,16 +232,20 @@ namespace TP_Integrador_Softtek_Backend.Migrations
                         {
                             Id = 1010,
                             Dni = 11222333,
+                            Email = "juan.perez@gmail.com",
                             Name = "Juan Perez",
-                            Password = "1234",
+                            Password = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+                            RoleId = 1,
                             Type = (byte)1
                         },
                         new
                         {
                             Id = 2020,
                             Dni = 22111555,
+                            Email = "maria.lopez@gmail.com",
                             Name = "Maria Lopez",
-                            Password = "2222",
+                            Password = "edee29f882543b956620b26d0ee0e7e950399b1c4222f5de05e06425b4c995e9",
+                            RoleId = 2,
                             Type = (byte)2
                         });
                 });
@@ -177,6 +290,39 @@ namespace TP_Integrador_Softtek_Backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Works");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 10500,
+                            Cost = 45272.25m,
+                            Date = new DateTime(2023, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HourValue = 5030.25m,
+                            NumberOfHours = 9,
+                            ProjectId = 10,
+                            ServiceId = 1
+                        },
+                        new
+                        {
+                            Id = 13400,
+                            Cost = 54003.6m,
+                            Date = new DateTime(2023, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HourValue = 4500.3m,
+                            NumberOfHours = 12,
+                            ProjectId = 30,
+                            ServiceId = 2
+                        });
+                });
+
+            modelBuilder.Entity("TP_Integrador_Softtek_Backend.Entities.User", b =>
+                {
+                    b.HasOne("TP_Integrador_Softtek_Backend.Entities.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }
