@@ -9,7 +9,6 @@ namespace TP_Integrador_Softtek_Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
 
     public class ServicesController : ControllerBase
     {
@@ -21,6 +20,7 @@ namespace TP_Integrador_Softtek_Backend.Controllers
         }
 
 
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         [Route("GetAll")]
         public async Task<ActionResult<IEnumerable<Service>>> GetAll()
@@ -30,6 +30,7 @@ namespace TP_Integrador_Softtek_Backend.Controllers
         }
 
 
+        [Authorize(Policy = "AdministradorConsultor")]
         [HttpGet]
         [Route("GetById/{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
@@ -45,6 +46,7 @@ namespace TP_Integrador_Softtek_Backend.Controllers
         }
 
 
+        [Authorize(Policy = "Administrador")]
         [HttpPost]
         [Route("Register")]
         public async Task<IActionResult> Register(ServiceDto dto)
@@ -56,6 +58,7 @@ namespace TP_Integrador_Softtek_Backend.Controllers
         }
 
 
+        [Authorize(Policy = "Administrador")]
         [HttpPut("Update/{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, ServiceDto dto)
         {
@@ -65,6 +68,7 @@ namespace TP_Integrador_Softtek_Backend.Controllers
         }
 
 
+        [Authorize(Policy = "Administrador")]
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Security.Claims;
 using System.Text;
 using TP_Integrador_Softtek_Backend.DataAccess;
 using TP_Integrador_Softtek_Backend.Services;
@@ -47,6 +48,21 @@ namespace TP_Integrador_Softtek_Backend
             {
                 options.UseSqlServer("name=DefaultConnection");
             });
+
+
+            builder.Services.AddAuthorization(option =>
+            {
+                option.AddPolicy("Administrador", policy =>
+                {
+                    policy.RequireClaim(ClaimTypes.Role, "1");
+                });
+
+                option.AddPolicy("AdministradorConsultor", policy =>
+                {
+                    policy.RequireClaim(ClaimTypes.Role, "1", "2");
+                });
+            });
+
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters()

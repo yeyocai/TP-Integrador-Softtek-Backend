@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using TP_Integrador_Softtek_Backend.DTOs;
+using TP_Integrador_Softtek_Backend.Helper;
 
 namespace TP_Integrador_Softtek_Backend.Entities
 {
@@ -12,7 +13,8 @@ namespace TP_Integrador_Softtek_Backend.Entities
             Dni = dto.Dni;
             Type = dto.Type;
             Email = dto.Email;
-            Password = dto.Password;
+            RoleId = 2;
+            Password = PasswordEncryptHelper.EncryptPassword(dto.Password);
             DischargeDate = null;
         }
 
@@ -23,7 +25,8 @@ namespace TP_Integrador_Softtek_Backend.Entities
             Dni = dto.Dni;
             Type = dto.Type;
             Email = dto.Email;
-            Password = dto.Password;
+            RoleId = dto.RoleId;
+            Password = PasswordEncryptHelper.EncryptPassword(dto.Password);
             DischargeDate = dto.DischargeDate;
         }
 
@@ -60,10 +63,15 @@ namespace TP_Integrador_Softtek_Backend.Entities
         public string Email { get; set; }
 
         [Required]
-        [Column("contrasenia", TypeName = "VARCHAR(50)")]
+        [Column("contrasenia", TypeName = "VARCHAR(250)")]
         public string Password { get; set; }
 
         [Column("fechaBaja", TypeName = "DATE")]
         public DateTime? DischargeDate { get; set; }
+
+        [Required]
+        [Column("rol")]
+        public int RoleId { get; set; }
+        public Role? Role { get; set; }
     }
 }
