@@ -19,4 +19,4 @@ En esta capa definiremos las clases correspondientes para realizar el repositori
 ​
 ## **Especificación de GIT**
 ​
-* Se deberán crear las ramas a partir de develop. La nomenclatura para el nombre de las ramas será la sigueinte: feature/NombreDeLaFeature
+* Se deberán crear las ramas a partir de develop. La nomenclatura para el nombre de las ramas será la siguiente: feature/NombreDeLaFeature
