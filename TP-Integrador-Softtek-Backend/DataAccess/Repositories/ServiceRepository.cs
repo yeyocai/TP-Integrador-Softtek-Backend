@@ -20,7 +20,7 @@ namespace TP_Integrador_Softtek_Backend.DataAccess.Repositories
 
         public override async Task<Service?> GetById(int id)
         {
-            return await _context.Services.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Services.FirstOrDefaultAsync(x => x.Id == id && x.State == true);
         }
 
 
@@ -37,7 +37,6 @@ namespace TP_Integrador_Softtek_Backend.DataAccess.Repositories
             service.State = updateService.State;
             service.HourValue = updateService.HourValue;
  
-
             _context.Services.Update(service);
             return true;
         }
